@@ -3,7 +3,11 @@ pipeline {
         label 'ubuntu_docker' // Укажите ноду с установленным Docker
     }
     parameters {
-        string(name: 'APP_Name', defaultValue: 'test', description: 'Вкажіть юзера')
+        string(
+            name: 'APP_Name', 
+            defaultValue: 'test', 
+            description: 'Вкажіть юзера'
+        )
         choice(
             name: 'DB',
             description: "Choose PostgreSQL version",
