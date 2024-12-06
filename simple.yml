@@ -17,7 +17,7 @@ services:
     depends_on:
     - 1db
     ports:
-    - "8169:8069"
+    - "8090-8169:8069"
     volumes:
       - ./${APP_Name}/odoo-web-data:/var/lib/odoo:rw
       - ./${APP_Name}/config:/etc/odoo:rw
