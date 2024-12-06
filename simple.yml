@@ -23,7 +23,7 @@ services:
       - ./${APP_Name}/config:/etc/odoo:rw
       - ./${APP_Name}/addons:/mnt/extra-addons:rw
     environment:
-    - HOST=mydb
+    - HOST=${APP_Name}_mydb
     - USER=${POSTGRES_PASSWORD}
     - PASSWORD=${POSTGRES_PASSWORD}
     networks:
