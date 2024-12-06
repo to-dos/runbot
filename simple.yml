@@ -1,6 +1,6 @@
 services:
   1db:
-    image: postgres:15
+    image: ${DB_IMAGE}
     container_name: ${APP_Name}_mydb
     environment:
       - POSTGRES_DB=${POSTGRES_DB}
@@ -12,12 +12,12 @@ services:
       - simple-odoo
       
   1odoo:
-    image: odoo:17
+    image: ${Odoo_IMAGE}
     container_name: ${APP_Name}_myodoo
     depends_on:
     - 1db
     ports:
-    - "8090-8169:8069"
+    - "8090-8290:8069"
     volumes:
       - ./${APP_Name}/odoo-web-data:/var/lib/odoo:rw
       - ./${APP_Name}/config:/etc/odoo:rw

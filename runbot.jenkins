@@ -4,6 +4,17 @@ pipeline {
     }
     parameters {
         string(name: 'APP_Name', defaultValue: 'test', description: 'Вкажіть юзера')
+        choice(
+            name: 'DB',
+            description: "Choose PostgreSQL version"
+            choices: ['15','14','13','12']
+        )
+        choice(
+            name: 'Odoo',
+            description: "Choose Odoo version"
+            choices: ['18','17','16','15']
+        )
+
     }
     options {
         timestamps()
@@ -27,6 +38,8 @@ pipeline {
                     // Обновление файла с указанием выбранного образа
                     sh """
                     sed -i 's|^APP_Name.*|APP_Name=${APP_Name}|' ${envFile}
+                    sed -i 's|^DB_IMAGE.*|DB_IMAGE=postgres:${DB}|' ${envFile}
+                    sed -i 's|^Odoo_IMAGE.*|Odoo_IMAGE=odoo:${Odoo}|' ${envFile}
                     """
                     echo "Updated simple.env with APP_Name=${APP_Name}"
                 }
@@ -38,7 +51,6 @@ pipeline {
                     def composeFile = 'simple.yml'
                     // Запуск docker-compose с обновленным .env файлом
                     sh """
-                     
                     docker-compose -f ${composeFile} -p ${APP_Name} --env-file simple.env up -d
                     """
                 }
