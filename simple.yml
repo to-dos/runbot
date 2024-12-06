@@ -3,9 +3,9 @@ services:
     image: postgres:15
     container_name: mydb
     environment:
-      - POSTGRES_DB=postgres
-      - POSTGRES_PASSWORD=Html2090
-      - POSTGRES_USER=odoo
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_USER=${POSTGRES_PASSWORD}
     volumes:
       - ./${APP_Owner}/data:/var/lib/postgresql/data
     networks:
@@ -24,8 +24,8 @@ services:
       - ./${APP_Owner}/addons:/mnt/extra-addons:rw
     environment:
     - HOST=mydb
-    - USER=odoo
-    - PASSWORD=Html2090
+    - USER=${POSTGRES_PASSWORD}
+    - PASSWORD=${POSTGRES_PASSWORD}
     networks:
       - simple-odoo
 
