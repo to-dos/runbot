@@ -7,7 +7,7 @@ services:
       - POSTGRES_PASSWORD=Html2090
       - POSTGRES_USER=odoo
     volumes:
-      - ./${APP_Owner}-data:/var/lib/postgresql/data
+      - ./${APP_Owner}/data:/var/lib/postgresql/data
     networks:
       - simple-odoo
       
@@ -19,9 +19,9 @@ services:
     ports:
     - "8169:8069"
     volumes:
-      - ./${APP_Owner}-odoo-web-data:/var/lib/odoo:rw
-      - ./${APP_Owner}-config:/etc/odoo:rw
-      - ./${APP_Owner}-addons:/mnt/extra-addons:rw
+      - ./${APP_Owner}/odoo-web-data:/var/lib/odoo:rw
+      - ./${APP_Owner}/config:/etc/odoo:rw
+      - ./${APP_Owner}/addons:/mnt/extra-addons:rw
     environment:
     - HOST=mydb
     - USER=odoo
