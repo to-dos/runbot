@@ -3,7 +3,7 @@ pipeline {
         label 'ubuntu_docker' // Укажите ноду с установленным Docker
     }
     parameters {
-        string(name: 'APP_Owner', defaultValue: 'test', description: 'Вкажіть юзера')
+        string(name: 'APP_Name', defaultValue: 'test', description: 'Вкажіть юзера')
     }
     options {
         timestamps()
@@ -26,9 +26,9 @@ pipeline {
 
                     // Обновление файла с указанием выбранного образа
                     sh """
-                    sed -i 's|^APP_Owner.*|APP_Owner=${APP_Owner}|' ${envFile}
+                    sed -i 's|^APP_Name.*|APP_Name=${APP_Name}|' ${envFile}
                     """
-                    echo "Updated simple.env with APP_Owner=${APP_Owner}"
+                    echo "Updated simple.env with APP_Name=${APP_Name}"
                 }
             }
         }
@@ -39,7 +39,7 @@ pipeline {
                     // Запуск docker-compose с обновленным .env файлом
                     sh """
                      
-                    docker-compose -f ${composeFile} --env-file simple.env up -d
+                    docker-compose -f ${composeFile} -p ${APP_Name} --env-file simple.env up -d
                     """
                 }
             }
