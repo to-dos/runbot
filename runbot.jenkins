@@ -1,0 +1,44 @@
+pipeline {
+    agent {
+        label 'ubuntu_docker' // Укажите ноду с установленным Docker
+    }
+    parameters {
+        string(name: 'APP_Owner', defaultValue: 'test', description: 'Вкажіть юзера')
+    }
+    stages {
+        stage('Checkout Files') {
+            steps {
+                script {
+                    // Клонирование репозитория
+                    //sh "git clone --branch ${GIT_BRANCH} ${GIT_REPO} repo"
+                    echo "will be clone repo"
+                }
+            }
+        }
+        stage('Update .env') {
+            steps {
+                script {
+                    // Путь к .env файлу
+                    def envFile = 'simple.env'
+
+                    // Обновление файла с указанием выбранного образа
+                    sh """
+                    sed -i 's|^APP_Owner.*|APP_Owner=${APP_Owner}|' ${envFile}
+                    """
+                    echo "Updated simple.env with APP_Owner=${APP_Owner}"
+                }
+            }
+        }
+        stage('Run Docker Compose') {
+            steps {
+                script {
+                    // Запуск docker-compose с обновленным .env файлом
+                    sh """
+                    cd repo
+                    docker-compose -f simple.yml --env-file simple.env up -d
+                    """
+                }
+            }
+        }
+    }
+}
