@@ -6,12 +6,12 @@ pipeline {
         string(name: 'APP_Name', defaultValue: 'test', description: 'Вкажіть юзера')
         choice(
             name: 'DB',
-            description: "Choose PostgreSQL version"
+            description: "Choose PostgreSQL version",
             choices: ['15','14','13','12']
         )
         choice(
             name: 'Odoo',
-            description: "Choose Odoo version"
+            description: "Choose Odoo version",
             choices: ['18','17','16','15']
         )
 
