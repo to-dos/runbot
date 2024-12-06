@@ -35,13 +35,19 @@ pipeline {
         stage('Run Docker Compose') {
             steps {
                 script {
+                    def composeFile = 'simple.yml'
                     // Запуск docker-compose с обновленным .env файлом
                     sh """
-                    cd repo
-                    docker-compose -f simple.yml --env-file simple.env up -d
+                     
+                    docker-compose -f ${composeFile} --env-file simple.env up -d
                     """
                 }
             }
+        }
+    }
+    post {
+        always {
+            echo 'Пайплайн завершен!'
         }
     }
 }
