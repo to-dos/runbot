@@ -5,8 +5,8 @@ pipeline {
     parameters {
         string(name: 'APP_Owner', defaultValue: 'test', description: 'Вкажіть юзера')
     }
-    option{
-        timestamp()
+    options {
+        timestamps()
     }
     stages {
         stage('Checkout Files') {
