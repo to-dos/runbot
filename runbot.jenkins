@@ -1,3 +1,4 @@
+#!/usr/bin/env groovy
 pipeline {
     agent {
         label 'ubuntu_docker' // Укажите ноду с установленным Docker
