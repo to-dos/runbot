@@ -55,6 +55,7 @@ pipeline {
                 script{
                     def odooFile = 'odoo.conf'
                     sh """
+                    mkdir -p ${APP_Name}/config
                     cp ${odooFile} /${APP_Name}/config
                     """
                 }
