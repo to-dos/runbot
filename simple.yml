@@ -5,7 +5,7 @@ services:
     environment:
       - POSTGRES_DB=${POSTGRES_DB}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-      - POSTGRES_USER=${POSTGRES_PASSWORD}
+      - POSTGRES_USER=${POSTGRES_USER}
     volumes:
       - ./${APP_Name}/data:/var/lib/postgresql/data
     networks:
@@ -24,7 +24,7 @@ services:
       - ./${APP_Name}/addons:/mnt/extra-addons:rw
     environment:
     - HOST=${APP_Name}_mydb
-    - USER=${POSTGRES_PASSWORD}
+    - USER=${POSTGRES_USER}
     - PASSWORD=${POSTGRES_PASSWORD}
     networks:
       - simple-odoo
