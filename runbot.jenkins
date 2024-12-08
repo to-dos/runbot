@@ -50,6 +50,16 @@ pipeline {
                 }
             }
         }
+        stage('Copy odoo.conf'){
+            steps{
+                script{
+                    def odooFile = 'odoo.conf'
+                    sh """
+                    cp ${odooFile} /${APP_Name}/config
+                    """
+                }
+            }
+        }
         stage('Run Docker Compose') {
             steps {
                 script {
