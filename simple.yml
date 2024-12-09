@@ -14,7 +14,6 @@ services:
   1odoo:
     image: ${Odoo_IMAGE}
     container_name: ${APP_Name}_myodoo
-    user: "1002:1003"
     depends_on:
     - 1db
     ports:
@@ -27,12 +26,6 @@ services:
     - HOST=${APP_Name}_mydb
     - USER=${POSTGRES_USER}
     - PASSWORD=${POSTGRES_PASSWORD}
-    command: >
-      bash -c "
-      if [ \$$(id -u) -eq 0 ]; then
-        groupmod -g 1003 odoo &&
-        usermod -u 1002 odoo
-      fi"
     networks:
       - simple-odoo
 
