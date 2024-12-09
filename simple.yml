@@ -29,8 +29,10 @@ services:
     - PASSWORD=${POSTGRES_PASSWORD}
     command: >
       bash -c "
-      groupmod -g 1003 odoo &&
-      usermod -u 1002 odoo"
+      if [ $(id -u) -eq 0 ]; then
+        groupmod -g 1003 odoo &&
+        usermod -u 1002 odoo
+        fi"
     networks:
       - simple-odoo
 
