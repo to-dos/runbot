@@ -73,6 +73,7 @@ pipeline {
                     mkdir -p ${APP_Name}/data
                     mkdir -p ${APP_Name}/odoo-web-data
                     cp ./odoo.conf ./${APP_Name}/config
+                    chmod 777 -R ./${APP_Name}
                     """
                 }
             }
