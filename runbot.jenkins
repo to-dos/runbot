@@ -8,8 +8,7 @@ pipeline {
             name: 'APP_Name', 
             defaultValue: 'test', 
             description: 'Вкажіть юзера (англ,цифри)',
-            trim: true,
-            pattern: '[a-zA-Z0-9]+'
+            trim: true
         )
         choice(
             name: 'DB',
@@ -33,6 +32,18 @@ pipeline {
                     // Клонирование репозитория
                     //sh "git clone --branch ${GIT_BRANCH} ${GIT_REPO} repo"
                     echo "will be clone repo"
+                }
+            }
+        }
+        stage('Validate Input') {
+            steps {
+                script {
+                    // Валидация параметра через регулярное выражение
+                    def appName = params.APP_Name
+                    if (!appName.matches('[a-zA-Z0-9]+')) {
+                        error "Недопустимый ввод! Используйте только латиницу и цифры."
+                    }
+                    echo "Параметр принят: ${appName}"
                 }
             }
         }
