@@ -14,7 +14,7 @@ services:
   1odoo:
     image: ${Odoo_IMAGE}
     container_name: ${APP_Name}_myodoo
-    user: "odoo:odoo"
+    user: "jenkins:jenkins"
     depends_on:
     - 1db
     ports:
