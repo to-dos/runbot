@@ -95,7 +95,7 @@ pipeline {
                     def configFile = 'test.conf'
                     def containerPort = sh(
                         script: """
-                        docker ps --filter "name=${APP_Name}_odoo" --format "{{.Ports}}" | grep -oE '[0-9]+->' | sed 's/->//'
+                        docker port ${APP_Name}_odoo  | awk -F ':' '{print \$2}'
                         """,
                         returnStdout: true
                     ).trim()
