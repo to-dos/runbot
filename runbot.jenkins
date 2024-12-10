@@ -99,6 +99,7 @@ pipeline {
                         """,
                         returnStdout: true
                     ).trim()
+                    echo "containerPort: ${containerPort}"
                     env.CONTAINER_PORT = containerPort
                     sh """
                     sed -i 's|http://localhost:8091/|http://localhost:${env.CONTAINER_PORT}/|g' ${configFile}
@@ -112,7 +113,7 @@ pipeline {
     }
     post {
         always {
-            echo 'Доступ до Оду http://runbot.it-artel.ua:${env.CONTAINER_PORT}'
+            echo "Доступ до Оду за посиланням http://runbot.it-artel.ua:${env.CONTAINER_PORT}"
         }
     }
 }
