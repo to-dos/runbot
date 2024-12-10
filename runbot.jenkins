@@ -96,9 +96,9 @@ pipeline {
                     sh """
                     CONTAINER_PORT=\$(docker ps --filter "name=${APP_Name}_myodoo" --format "{{.Ports}}" | grep -oE '[0-9]+->' | sed 's/->//')
                     sed -i 's|http://localhost:8091/|http://localhost:\${CONTAINER_PORT}/|g' ${configFile}
-                    echo "P@ss" | sudo -S cp ./test.conf /etc/nginx/sites-available/${APP_Name}_myodoo.conf
-                    echo "P@ss" | sudo -S ln -s /etc/nginx/sites-available/${APP_Name}_myodoo.conf /etc/nginx/sites-enabled/
-                    echo "P@ss" | sudo -S systemctl reload nginx
+                    sudo cp ./test.conf /etc/nginx/sites-available/${APP_Name}_myodoo.conf
+                    sudo ln -s /etc/nginx/sites-available/${APP_Name}_myodoo.conf /etc/nginx/sites-enabled/
+                    sudo systemctl reload nginx
                     """
                 }
             }
