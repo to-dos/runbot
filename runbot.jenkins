@@ -89,7 +89,7 @@ pipeline {
                 }
             }
         }
-        stage('Publicate Odoo'){
+        stage('Publicating Odoo'){
             steps{
                 script{
                     def configFile = 'test.conf'
