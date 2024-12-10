@@ -7,7 +7,7 @@ pipeline {
         string(
             name: 'APP_Name', 
             defaultValue: 'test', 
-            description: 'Вкажіть юзера (англ,цифри)',
+            description: 'Вкажіть назву аплікейшена (англ,цифри)',
             trim: true
         )
         choice(

@@ -1,7 +1,7 @@
 services:
   1db:
     image: ${DB_IMAGE}
-    container_name: ${APP_Name}_mydb
+    container_name: ${APP_Name}_db
     environment:
       - POSTGRES_DB=postgres
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
@@ -13,7 +13,7 @@ services:
       
   1odoo:
     image: ${Odoo_IMAGE}
-    container_name: ${APP_Name}_myodoo
+    container_name: ${APP_Name}_odoo
     depends_on:
     - 1db
     ports:
@@ -23,7 +23,7 @@ services:
       - ./${APP_Name}/config:/etc/odoo:rw
       - ./${APP_Name}/addons:/mnt/extra-addons:rw
     environment:
-    - HOST=${APP_Name}_mydb
+    - HOST=${APP_Name}_db
     - USER=${POSTGRES_USER}
     - PASSWORD=${POSTGRES_PASSWORD}
     networks:
