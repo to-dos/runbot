@@ -86,10 +86,6 @@ pipeline {
                     sh """
                     docker-compose -f ${composeFile} -p ${APP_Name} --env-file simple.env up -d
                     """
-                }
-            }
-            steps{
-                script{
                     def configFile = 'test.conf'
                     sh """
                     CONTAINER_PORT=\$(docker ps --filter "name=${APP_Name}_myodoo" --format "{{.Ports}}" | grep -oE '[0-9]+->' | sed 's/->//')
