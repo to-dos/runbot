@@ -92,7 +92,7 @@ pipeline {
                 script{
                     def configFile = 'test.conf'
                     sh """
-                    CONTAINER_PORT=$(docker ps --filter "name=$${APP_Name}_myodoo" --format "{{.Ports}}" | grep -oE '[0-9]+->' | sed 's/->//')
+                    CONTAINER_PORT=$(docker ps --filter "name=${APP_Name}_myodoo" --format "{{.Ports}}" | grep -oE '[0-9]+->' | sed 's/->//')
                     sed -i 's|http://localhost:8091/|http://localhost:\$CONTAINER_PORT/|g' ${configFile}
                     cp ./test.conf /etc/nginx/site-sites-available/${APP_Name}_myodoo.conf
                     nginx -t
