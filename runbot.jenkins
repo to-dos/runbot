@@ -98,7 +98,7 @@ pipeline {
                     sed -i 's|http://localhost:8091/|http://localhost:\${CONTAINER_PORT}/|g' ${configFile}
                     echo "P@ss" | sudo -S cp ./test.conf /etc/nginx/sites-available/${APP_Name}_myodoo.conf
                     echo "P@ss" | sudo -S ln -s /etc/nginx/sites-available/${APP_Name}_myodoo.conf /etc/nginx/sites-enabled/
-                    echo "P@ss" | sudo -S systemctl reload ngix
+                    echo "P@ss" | sudo -S systemctl reload nginx
                     """
                 }
             }
