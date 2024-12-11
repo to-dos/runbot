@@ -107,6 +107,22 @@ pipeline {
                     echo "P@ss" | sudo -S ln -s /etc/nginx/sites-available/${APP_Name}_odoo.conf /etc/nginx/sites-enabled/
                     echo "P@ss" | sudo -S systemctl reload nginx
                     """
+
+                    withCredentials([string(credentialsId: 'Cloudflare_Token', variable: 'TOKEN')]) {
+                        echo "Using secret token: ${TOKEN}" // Вывод токена (небезопасно)
+                        // Используйте токен в командах
+                        sh """
+                        curl -X POST "https://api.cloudflare.com/client/v4/zones/e1f406a8d36a4ab693874be00bf99220/dns_records" \
+                        -H "Authorization: Bearer ${TOKEN}" \
+                        -H "Content-Type: application/json" \
+                        --data '{
+                          "type":"A",
+                          "name":"'"${APP_Name}_odoo.runbot.it-artel.ua"'",
+                          "content":"37.27.90.233",
+                          "ttl":1,
+                          "proxied":false
+                        }'
+                        """
                 }
             }
         }
