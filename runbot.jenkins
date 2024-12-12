@@ -103,9 +103,10 @@ pipeline {
                     env.CONTAINER_PORT = containerPort
                     sh """
                     sed -i 's|http://localhost:8091/|http://localhost:${env.CONTAINER_PORT}/|g' ${configFile}
-                    echo "P@ss" | sudo -S cp ./test.conf /etc/nginx/sites-available/${APP_Name}_odoo.conf
-                    echo "P@ss" | sudo -S ln -s /etc/nginx/sites-available/${APP_Name}_odoo.conf /etc/nginx/sites-enabled/
-                    echo "P@ss" | sudo -S systemctl reload nginx
+                    sed -i 's|runbot.it-artel.ua|${APP_Name}_odoo.runbot.it-artel.ua|g' ${configFile}
+                    sudo cp ./test.conf /etc/nginx/sites-available/${APP_Name}_odoo.conf
+                    sudo ln -s /etc/nginx/sites-available/${APP_Name}_odoo.conf /etc/nginx/sites-enabled/
+                    sudo systemctl reload nginx
                     """
 
                     withCredentials([string(credentialsId: 'Cloudflare_Token', variable: 'TOKEN')]) {
