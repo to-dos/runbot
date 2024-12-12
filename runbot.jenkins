@@ -130,7 +130,7 @@ pipeline {
     }
     post {
         always {
-            echo "Доступ до Оду за посиланням http://${APP_Name}_odoo.runbot.it-artel.ua"
+            echo "Доступ до Оду за посиланням https://${APP_Name}_odoo.runbot.it-artel.ua"
         }
     }
 }
